@@ -17,9 +17,6 @@ server.use("/api/auth", authRouter);
 // server.use('/api/users', userRouter)
 // server.use('/api/plants', plantRouter)
 
-server.use("/", (req, res) => {
-  res.status(200).json({ message: "api up and deployed" });
-});
 
 const user = require("./Users/users-model");
 server.get("/allUsers", async (req, res) => {
@@ -29,6 +26,10 @@ server.get("/allUsers", async (req, res) => {
   } else {
     res.status(400).json({ message: "cannot get all users" });
   }
+});
+
+server.get("/", (req, res) => {
+  res.status(200).json({ message: "api up and deployed" });
 });
 
 module.exports = server;
