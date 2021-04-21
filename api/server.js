@@ -21,4 +21,14 @@ server.use("/", (req, res) => {
   res.status(200).json({ message: "api up and deployed" });
 });
 
+const user = require("./Users/users-model");
+server.get("/allUsers", async (req, res) => {
+  const allUsers = await user.getAll();
+  if (allUsers) {
+    res.status(200).json(allUsers);
+  } else {
+    res.status(400).json({ message: "cannot get all users" });
+  }
+});
+
 module.exports = server;
