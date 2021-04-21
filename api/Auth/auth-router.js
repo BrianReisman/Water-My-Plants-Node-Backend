@@ -5,7 +5,6 @@ const users = require("../Users/users-model");
 route.post("/register", async (req, res, next) => {
   try {
     const newUser = req.body;
-console.log(newUser)
     const hash = bcrypt.hashSync(newUser.password, 10);
     newUser.password = hash;
 
@@ -26,15 +25,12 @@ console.log(newUser)
 route.post("/login", async (req, res, next) => {
   try {
     let { username, password } = req.body;
-    console.log(password)
-    const user = await users.findByUsername(username).first()
+    const user = await users.findByUsername(username).first();
 
-    console.log(bcrypt.compareSync(password, user.password)) //false
-    
     if (user && bcrypt.compareSync(password, user.password)) {
-      res.status(200).json({message: `Welcome ${username}`})
+      res.status(200).json({ message: `Welcome ${username}` });
     } else {
-      res.status(400).json({message: 'invalid'})
+      res.status(400).json({ message: "invalid" });
     }
   } catch (error) {
     console.log("catch of /login in users-model.js", error);
