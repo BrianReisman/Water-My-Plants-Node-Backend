@@ -22,11 +22,16 @@ const user = require("./Users/users-model");
 
 server.get("/allUsers", async (req, res) => {
   // res.status(200).json({message: 'another endpoint'})
-  const allUsers = await user.getAll();
-  if (allUsers) {
-    res.status(200).json(allUsers);
-  } else {
-    res.status(400).json({ message: "cannot get all users" });
+  try {
+    const allUsers = await user.getAll();
+    if (allUsers) {
+      res.status(200).json(allUsers);
+    } else {
+      res.status(400).json({ message: "cannot get all users" });
+    }
+    
+  } catch (error) {
+    res.status(500).json({message: error})
   }
 });
 
