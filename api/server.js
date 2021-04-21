@@ -17,8 +17,8 @@ server.use("/api/auth", authRouter);
 // server.use('/api/users', userRouter)
 // server.use('/api/plants', plantRouter)
 
-server.get('/', (req, res) => {
-  res.status(200).json({message: 'api up and deployed'})
-})
+server.use("/", (req, res) => {
+  res.status(200).json({ message: "api up and deployed" });
+});
 
 module.exports = server;
