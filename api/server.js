@@ -19,6 +19,7 @@ server.use("/api/auth", authRouter);
 
 
 const user = require("./Users/users-model");
+
 server.get("/allUsers", async (req, res) => {
   const allUsers = await user.getAll();
   if (allUsers) {
