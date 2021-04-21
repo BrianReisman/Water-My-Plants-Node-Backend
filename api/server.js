@@ -21,13 +21,13 @@ server.use("/api/auth", authRouter);
 const user = require("./Users/users-model");
 
 server.get("/allUsers", async (req, res) => {
-  res.status(200).json({message: 'another endpoint'})
-  // const allUsers = await user.getAll();
-  // if (allUsers) {
-  //   res.status(200).json(allUsers);
-  // } else {
-  //   res.status(400).json({ message: "cannot get all users" });
-  // }
+  // res.status(200).json({message: 'another endpoint'})
+  const allUsers = await user.getAll();
+  if (allUsers) {
+    res.status(200).json(allUsers);
+  } else {
+    res.status(400).json({ message: "cannot get all users" });
+  }
 });
 
 server.get("/", (req, res) => {
