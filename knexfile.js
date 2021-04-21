@@ -7,7 +7,7 @@ module.exports = {
     migrations: { directory: "./data/migrations" },
     seeds: { directory: "./data/seeds" },
     connection: {
-      filename: "./data/user.db3",
+      filename: "./data/user.sqlite3",
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -25,7 +25,7 @@ module.exports = {
       afterCreate: (conn, done) => conn.run("PRAGMA foreign_keys = ON", done),
     },
     connection: {
-      filename: "./data/waterMyPlantsDBProduction.db3",
+      filename: "./data/waterMyPlantsDBProduction.sqlite3",
     },
     pool: {
       min: 2,
