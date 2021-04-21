@@ -1,0 +1,31 @@
+{
+  "name": "water-my-plants-node-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianReisman/Water-My-Plants-Node-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrianReisman/Water-My-Plants-Node-Backend/issues"
+  },
+  "homepage": "https://github.com/BrianReisman/Water-My-Plants-Node-Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^1.0.1",
+    "express": "^4.17.1",
+    "helmet": "^4.5.0",
+    "knex": "^0.95.4",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
