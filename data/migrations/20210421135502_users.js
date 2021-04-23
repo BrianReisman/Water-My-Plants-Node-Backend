@@ -25,7 +25,7 @@ exports.up = function (knex) {
         .references("plants.plant_id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl.string("nickname", 128);
+      tbl.string("plant_nickname", 128);
     });
 };
 

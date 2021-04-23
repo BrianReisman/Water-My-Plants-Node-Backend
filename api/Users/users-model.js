@@ -4,15 +4,24 @@ const getAll = () => {
   return db("users");
 };
 
-const findByUsername = (username) => {
-  return db("users").where({ username: username });
+const findUserById = (user_id) => {
+  return db("users").where({ user_id }).first()
 };
 
-const findById = (user_id) => {
-  return db("users")
-    .where({ user_id })
-    .first()
-    .select("username", "phone_number", "user_id");
+const findByUsername = (username) => {
+  return db("users").where({ username: username })
+};
+
+const findAllPlantsByUserId = (user_id) => {
+  return db("user_plants")
+    .join("users", "users.user_id", "user_plants.user_id")
+    .join("plants", "plants.plant_id", "user_plants.plant_id")
+    .select(
+      "plants.h20_frequency",
+      "plants.species",
+      "user_plants.plant_nickname"
+    )
+    .where({ "users.user_id": user_id });
 };
 
 const add = async (newUser) => {
@@ -28,5 +37,6 @@ module.exports = {
   add,
   findByUsername,
   getAll,
-  findById,
+  findAllPlantsByUserId,
+  findUserById,
 };

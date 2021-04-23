@@ -13,6 +13,12 @@ exports.seed = function (knex) {
           password: bcrypt.hashSync("password", 8),
           phone_number: "123.456.7890",
         },
+        {
+          user_id: 2,
+          username: "Brian #2",
+          password: bcrypt.hashSync("password", 8),
+          phone_number: "#2 seed",
+        },
       ]);
     });
 };

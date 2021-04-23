@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "production": "cross-env NODE_ENV=production knex migrate:latest && cross-env NODE_ENV=production knex seed:run",
+    "knex": "cross-env NODE_ENV=production knex migrate:rollback && cross-env NODE_ENV=production knex migrate:latest && cross-env NODE_ENV=production knex seed:run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
