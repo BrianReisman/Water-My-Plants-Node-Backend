@@ -68,8 +68,11 @@ const checkLogin = async (req, res, next) => {
 };
 
 const restricted = (req, res, next) => {
+  // ! is frontend sending token with 'bearer'?
   const token = req.header.Authorization?.split(' ')[1]
-  
+  // ! ADD token valid check
+// ! header[[s]] or header?
+// next()
 };
 
 module.exports = {

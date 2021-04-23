@@ -1,10 +1,9 @@
 // import
-
 const express = require("express");
 const helmet = require("helmet");
 
 const authRouter = require("./Auth/auth-router");
-// const userRouter = require("./Users/users-router");
+const userRouter = require("./Users/users-router");
 // const plantRouter = require('./Plants/plants-router')
 
 // create
@@ -14,9 +13,8 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use("/api/auth", authRouter);
-// server.use('/api/users', userRouter)
+server.use("/api/users", userRouter);
 // server.use('/api/plants', plantRouter)
-
 
 const user = require("./Users/users-model");
 
@@ -29,9 +27,8 @@ server.get("/allUsers", async (req, res) => {
     } else {
       res.status(400).json({ message: "cannot get all users" });
     }
-    
   } catch (error) {
-    res.status(500).json({message: error})
+    res.status(500).json({ message: error });
   }
 });
 

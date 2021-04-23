@@ -34,7 +34,6 @@ route.post("/register", checkPayload, checkUsername, async (req, res, next) => {
 });
 
 route.post("/login", checkLogin, async (req, res, next) => {
-  console.log("req.body>>>", req.body);
   try {
     let { username, password } = req.body;
     const user = await users.findByUsername(username).first();

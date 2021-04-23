@@ -1,11 +1,18 @@
 const db = require("../../data/dbConfig");
 
 const getAll = () => {
-  return db('users')
-}
+  return db("users");
+};
 
 const findByUsername = (username) => {
   return db("users").where({ username: username });
+};
+
+const findById = (user_id) => {
+  return db("users")
+    .where({ user_id })
+    .first()
+    .select("username", "phone_number", "user_id");
 };
 
 const add = async (newUser) => {
@@ -20,5 +27,6 @@ const add = async (newUser) => {
 module.exports = {
   add,
   findByUsername,
-  getAll
+  getAll,
+  findById,
 };
