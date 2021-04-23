@@ -9,6 +9,7 @@ username: 'testUser'
 password: 'password'
 You can also create new users following the schema below
 
+## Auth
 ### Endpoint: /api/auth/register
 
 | PROPERTY_NAME | PROPERTY_TYPE         |
@@ -24,6 +25,11 @@ You can also create new users following the schema below
 | username\*    | string        |
 | password\*    | string        |
 
+## User
+### Endpoint: api/users/:id
+| METHOD | PARAMETER | TYPE |
+| ------ | --------- | ---- |
+| [GET]  | :id       | id number of valid user|
 
 
 
