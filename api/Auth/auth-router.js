@@ -1,6 +1,7 @@
 const route = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {jwtsecret} = require('../../config/jwtsecret')
 
 const users = require("../Users/users-model");
 const {
@@ -46,7 +47,7 @@ route.post("/login", checkLogin, async (req, res, next) => {
     }
   } catch (error) {
     res.status(500).json({ message: "something is UP" });
-    console.log("catch of /login in users-model.js", error);
+    console.log("catch of /login auth-router", error);
   }
 });
 
@@ -55,12 +56,11 @@ function generateToken(user) {
     sub: user.user_id,
     username: user.username,
   };
-  const secret = "test"; //!
   const options = {
     expiresIn: "1h",
   };
 
-  return jwt.sign(payload, secret, options);
+  return jwt.sign(payload, jwtsecret, options);
 }
 
 module.exports = route;

@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const authRouter = require("./Auth/auth-router");
 const userRouter = require("./Users/users-router");
 // const plantRouter = require('./Plants/plants-router')
+const { restricted } = require("./Auth/auth-middleware");
 
 // create
 const server = express();
@@ -13,7 +14,7 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use("/api/auth", authRouter);
-server.use("/api/users", userRouter);
+server.use("/api/users", restricted, userRouter);
 // server.use('/api/plants', plantRouter)
 
 const user = require("./Users/users-model");

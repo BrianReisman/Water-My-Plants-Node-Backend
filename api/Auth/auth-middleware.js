@@ -1,4 +1,6 @@
+const jwt = require("jsonwebtoken");
 const users = require("../Users/users-model");
+const {jwtsecret} = require('../../config/jwtsecret')
 
 const checkPayload = (req, res, next) => {
   // all three fields are present and of the correct type, string, and password is at least 6 characters long
@@ -69,10 +71,25 @@ const checkLogin = async (req, res, next) => {
 
 const restricted = (req, res, next) => {
   // ! is frontend sending token with 'bearer'?
-  const token = req.header.Authorization?.split(' ')[1]
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(token, jwtsecret, (error, decodedToken) => {
+      if (error) {
+        console.log(error)
+        res.status(401).json({ message: "invalid credentials" });
+      } else {
+        req.decodedToken = decodedToken;
+        console.log("decoded Token", decodedToken);
+        next();
+      }
+    });
+  } else {
+    res.status(401).json({ message: "missing credentials" });
+  }
+
   // ! ADD token valid check
-// ! header[[s]] or header?
-// next()
+  // ! header[[s]] or header?
+  // next()
 };
 
 module.exports = {
