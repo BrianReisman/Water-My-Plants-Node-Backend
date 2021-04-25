@@ -27,6 +27,12 @@ You can also create new users following the schema below
 
 ## User
 ### Endpoint: api/users/:id
+In order to access any endpoint beginning with api/users... your request needs to have: 
+req.headers.authorization
+[note: headers (plural), not header (singular)]
+[note: authorization not authentication]
+Authorization is the key, the value should be the token recieved upon successful login
+
 | METHOD | PARAMETER | TYPE |
 | ------ | --------- | ---- |
 | [GET]  | :id       | id number of valid user|
