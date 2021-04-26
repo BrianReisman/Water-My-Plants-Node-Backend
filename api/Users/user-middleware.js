@@ -1,7 +1,8 @@
 const model = require("./users-model");
 
 const userExists = async (req, res, next) => {
-  const id = req.params.userid;
+  const { userid: id } = req.params;
+  
   try {
     const user = await model.findUserById(id);
     if (!user) {

@@ -5,38 +5,70 @@ const getAll = () => {
 };
 
 const findUserById = (user_id) => {
-  return db("users").where({ user_id }).first()
+  return db("users").where({ user_id }).first();
 };
 
 const findByUsername = (username) => {
-  return db("users").where({ username: username })
+  return db("users").where({ username: username });
 };
 
 const findAllPlantsByUserId = (user_id) => {
-  return db("user_plants")
-    .join("users", "users.user_id", "user_plants.user_id")
-    .join("plants", "plants.plant_id", "user_plants.plant_id")
+  return db("users")
+    .join("plants", "plants.user_id", "users.user_id")
     .select(
+      "users.user_id",
       "plants.h20_frequency",
       "plants.species",
-      "user_plants.plant_nickname"
+      "plants.plant_nickname"
     )
     .where({ "users.user_id": user_id });
-};
+}; //*
 
-const add = async (newUser) => {
+const findPlantById = (user) => {
+  console.log("from model", user);
+  return db("plants")
+    .join("users", "users.user_id", "plants.user_id")
+    .where({
+      "users.user_id": user.userid,
+      "plants.plant_id": user.plantid,
+    })
+    .select("plants.species", "plants.h20_frequency", "plants.plant_nickname");
+}; //*
+
+const addNewUser = async (newUser) => {
   await db("users").insert(newUser);
   return findByUsername(newUser.username).select(
     "username",
     "phone_number",
     "user_id"
   );
+}; //*
+
+const deletePlant = async (user) => {
+  console.log("model", user);
+  const deletedPlant = await db("user_plants").where({
+    user_id: user.userid,
+    // plant_id: user.plantid,
+  });
+  return deletedPlant;
+};
+
+const addNewPlant = async (newPlant, userid) => {
+  const plantToAdd = {...newPlant, user_id: userid}
+  console.log(plantToAdd)
+  // console.log('new Plant>>>', newPlant, 'userid',userid)
+  const addedPlant = await db("plants").insert(plantToAdd);
+  console.log('addedPlant inside MODEL>>>>',addedPlant);
+  return addedPlant
 };
 
 module.exports = {
-  add,
+  addNewUser,
   findByUsername,
   getAll,
   findAllPlantsByUserId,
   findUserById,
+  findPlantById,
+  deletePlant,
+  addNewPlant,
 };

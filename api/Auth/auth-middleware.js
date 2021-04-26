@@ -79,7 +79,7 @@ const restricted = (req, res, next) => {
         res.status(401).json({ message: "invalid credentials" });
       } else {
         req.decodedToken = decodedToken;
-        console.log("decoded Token", decodedToken);
+        // console.log("decoded Token", decodedToken);
         next();
       }
     });

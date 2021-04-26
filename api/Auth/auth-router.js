@@ -18,12 +18,12 @@ route.post("/register", checkPayload, checkUsername, async (req, res, next) => {
     const hash = bcrypt.hashSync(newUser.password, 10);
     newUser.password = hash;
 
-    const added = await users.add(newUser);
+    const added = await users.addNewUser(newUser);
 
     if (added) {
       res
         .status(201)
-        .json({ message: "user successfully create", user: added });
+        .json({ message: "user successfully created", user: added });
     } else {
       res.status(400).json({ message: "failed to create new User" });
     }
