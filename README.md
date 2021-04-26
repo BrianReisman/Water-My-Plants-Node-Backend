@@ -5,8 +5,13 @@ Base URL: https://water-my-plants-node.herokuapp.com/
 A \* denotes required
 
 Mock user for developement that already exists if you want to test the /api/auth/login endpoint:
-username: 'testUser'
-password: 'password'
+
+username: 'username1' + password: 'password'
+This user has 3 plants already loaded in
+
+username: 'username2' + password: 'password'
+This user has 1 plant already loaded in
+
 You can also create new users following the schema below
 
 ## Auth
