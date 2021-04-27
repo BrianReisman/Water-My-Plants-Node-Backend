@@ -1,6 +1,6 @@
 const route = require("express").Router();
 const users = require("./users-model");
-const { userExists, plantExists } = require("./user-middleware");
+const { userExists, plantExists, validatePlant } = require("./user-middleware");
 
 //* get *all* plants owned by this user vai user's id
 route.get("/:userid", userExists, async (req, res) => {
@@ -39,7 +39,7 @@ route.get("/:userid/:plantid", userExists, async (req, res) => {
 
 //* add a new plant
 //TODO: add validation to req.body
-route.post("/:userid", async (req, res) => {
+route.post("/:userid", validatePlant, async (req, res) => {
   const { userid } = req.params;
   const newPlant = req.body;
 
@@ -71,7 +71,7 @@ route.delete("/:userid/:plantid", async (req, res) => {
 }); //*
 
 //* update plant
-route.put("/:userid/:plantid", plantExists, async (req, res) => {
+route.put("/:userid/:plantid", validatePlant, plantExists, async (req, res) => {
   const updatedPlant = req.body;
   const { plantid, userid } = req.params;
 

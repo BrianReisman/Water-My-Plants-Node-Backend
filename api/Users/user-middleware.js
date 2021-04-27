@@ -2,7 +2,7 @@ const model = require("./users-model");
 
 const userExists = async (req, res, next) => {
   const { userid: id } = req.params;
-  
+
   try {
     const user = await model.findUserById(id);
     if (!user) {
@@ -17,13 +17,26 @@ const userExists = async (req, res, next) => {
   }
 };
 
-const plantExists = async (req,res,next) => {
-  const [plant] = await model.findPlantById(req.params)
-  if(plant){
-    next()
+const plantExists = async (req, res, next) => {
+  const [plant] = await model.findPlantById(req.params);
+  if (plant) {
+    next();
   } else {
-    res.status(400).json({message: `[PLANT DOES NOT EXIST] User: ${req.params.userid} does not have a plant with an id: ${req.params.plantid} so it cannot be updated.`})
+    res.status(400).json({
+      message: `[PLANT DOES NOT EXIST] User: ${req.params.userid} does not have a plant with an id: ${req.params.plantid} so it cannot be updated.`,
+    });
   }
-}
+};
 
-module.exports = { userExists, plantExists };
+const validatePlant = (req, res, next) => {
+  const { species, h20_frequency, plant_nickname } = req.body;
+  if(!species ||
+    !h20_frequency ||
+    !plant_nickname){
+      res.status(400).json({message: 'species, h20_frequency, plant_nickname are all required'})
+    } else {
+      next()
+    }
+};
+
+module.exports = { userExists, plantExists, validatePlant };
