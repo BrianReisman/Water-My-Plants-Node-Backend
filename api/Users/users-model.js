@@ -19,7 +19,8 @@ const findAllPlantsByUserId = (user_id) => {
       "users.user_id",
       "plants.h20_frequency",
       "plants.species",
-      "plants.plant_nickname"
+      "plants.plant_nickname",
+      "plants.plant_id"
     )
     .where({ "users.user_id": user_id });
 }; //*
@@ -31,7 +32,7 @@ const findPlantById = (user) => {
       "users.user_id": user.userid,
       "plants.plant_id": user.plantid,
     })
-    .select("plants.species", "plants.h20_frequency", "plants.plant_nickname");
+    .select("plants.species", "plants.h20_frequency", "plants.plant_nickname", "plants.plant_id");
 }; //*
 
 const addNewUser = async (newUser) => {

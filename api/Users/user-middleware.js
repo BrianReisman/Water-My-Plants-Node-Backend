@@ -17,4 +17,13 @@ const userExists = async (req, res, next) => {
   }
 };
 
-module.exports = { userExists };
+const plantExists = async (req,res,next) => {
+  const [plant] = await model.findPlantById(req.params)
+  if(plant){
+    next()
+  } else {
+    res.status(400).json({message: `[PLANT DOES NOT EXIST] User: ${req.params.userid} does not have a plant with an id: ${req.params.plantid} so it cannot be updated.`})
+  }
+}
+
+module.exports = { userExists, plantExists };
