@@ -1,7 +1,7 @@
 const route = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {jwtsecret} = require('../../config/jwtsecret')
+const { jwtsecret } = require("../../config/jwtsecret");
 
 const users = require("../Users/users-model");
 const {
@@ -38,10 +38,11 @@ route.post("/login", checkLogin, async (req, res, next) => {
   try {
     let { username, password } = req.body;
     const user = await users.findByUsername(username).first();
-
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user);
-      res.status(200).json({ message: `Welcome ${username}`, token });
+      res
+        .status(200)
+        .json({ message: `Welcome ${username}`, token, user_id: user.user_id });
     } else {
       res.status(400).json({ message: "invalid" });
     }

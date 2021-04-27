@@ -32,7 +32,12 @@ const findPlantById = (user) => {
       "users.user_id": user.userid,
       "plants.plant_id": user.plantid,
     })
-    .select("plants.species", "plants.h20_frequency", "plants.plant_nickname", "plants.plant_id");
+    .select(
+      "plants.species",
+      "plants.h20_frequency",
+      "plants.plant_nickname",
+      "plants.plant_id"
+    );
 }; //*
 
 const addNewUser = async (newUser) => {
